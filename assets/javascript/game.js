@@ -53,4 +53,24 @@ stringToArray: function(str) {
     for (let i = 0 ; i < this.answerSpace.length ; i++) {
         game.rightGuesses.push("_");
     };
+},
+
+analyzeGuess: function(arr, val) {
+    if (game.badGuess(val)) {
+        // check validity of input against array of indices
+        let analyzeIndices = [];
+        for(let i = 0; i < arr.length; i++) {
+            if (arr[i] === val) {
+                analyzeIndices.push(i);
+            }
+        };
+        if (analyzeIndices.length !== 0) {
+            game.correctGuess(analyzeIndices); 
+        } else {
+            game.incorrectGuess(val);
+        }
+    } else {
+        html_bad_guess_alert.textContent = "Your entry is invalid m'lord";
+        html_bad_guess_alert.style = show;
+    }
 };
