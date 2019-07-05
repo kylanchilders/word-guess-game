@@ -74,3 +74,24 @@ analyzeGuess: function(arr, val) {
         html_bad_guess_alert.style = show;
     }
 };
+
+correctGuess: function(indices) {
+    if (game.alreadyCorrect(game.userInput)) {
+        html_bad_guess_alert.textContent = "You've already guessed that one my leige";
+        html_bad_guess_alert.style = show;
+    } else {
+        for (let i = 0 ; i < indices.length ; i++ ) {
+            game.rightGuesses[indices[i]] = game.userInput;
+        }
+    }
+},
+
+incorrectGuess: function(val) {
+    if (game.alreadyWrong(val)) {
+        html_bad_guess_alert.textContent = "Incorrect good sir";
+        html_bad_guess_alert.style = show;
+    } else {
+        game.wrongGuesses.push(val.toUpperCase());
+        game.attempts --;
+    }
+},
