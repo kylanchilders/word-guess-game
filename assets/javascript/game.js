@@ -25,6 +25,32 @@ var game = {
 
     answers: [
         "sword", "shield", "mace", "flail", "morning star", "armor", "dragon", "troll", "ogre", "wyvern", "hydra", "wizard", "quest", "adventure", "knight", "prince", "princess", "queen", "king", "orcs", "giant", "goblin", "elves", "warg", "curse", "spell", "sorcerer", "sorceress", "hero", "battle", "seige", "rogue", "druid", "warrior", "barbarian", "shaman", "mage", "druid", "warhammer", "archer", "bow and arrow", "crossbow", "spear", "bard", "warlock", "sellsword", "castle", "dungeon"
-    ]
-    
-}
+    ],
+
+    stageGame: function() {
+        let randomPick = this.answers[Math.floor(Math.random()*this.answers.length)];
+        this.answerSpace = [];
+        this.rightGuesses = [];
+        this.stringToArray(randomPick);
+        this.attempts = 6;
+        this.wrongGuesses = [];
+        html_start_button.style = show;
+        html_sub_header.style = show;
+        html_right_guesses.textContent = game.arrayToString(game.rightGuesses);
+        html_wrong_guesses.textContent =  game.arrayToString(game.wrongGuesses);
+        this.runGame();
+    },
+
+// formatting text
+arrayToString: function(arr) {
+    //change array to string
+    return arr = arr.join("");
+},
+
+stringToArray: function(str) {
+    // store a string to an array
+    game.answerSpace = str.toUpperCase().replace(" ", "_").split("");
+    for (let i = 0 ; i < this.answerSpace.length ; i++) {
+        game.rightGuesses.push("_");
+    };
+};
