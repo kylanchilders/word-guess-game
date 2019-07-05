@@ -73,7 +73,7 @@ analyzeGuess: function(arr, val) {
         html_bad_guess_alert.textContent = "Your entry is invalid m'lord";
         html_bad_guess_alert.style = show;
     }
-};
+},
 
 correctGuess: function(indices) {
     if (game.alreadyCorrect(game.userInput)) {
@@ -94,4 +94,37 @@ incorrectGuess: function(val) {
         game.wrongGuesses.push(val.toUpperCase());
         game.attempts --;
     }
+},
+
+badGuess: function(val) {
+    // reject input unless its a letter
+    if (val.length === 1 && val.match(/[a-z]/i)) {
+        return true;
+    } else {return false;}
+},
+
+alreadyCorrect: function(val) {
+    return game.rightGuesses.includes(val);
+},
+
+alreadyWrong: function(val) {
+    return game.wrongGuesses.includes(val);
+},
+
+gameOverState: function() {
+    if (game.attempts == 0) {
+        game.failState();
+    } else if (game.answerSpace.join(",") == game.rightGuesses.join(",")) {
+        game.successState();
+    }
+},
+
+failState: function() {
+    alert("You have failed m'lord");
+    html_start_button.style = show;
+},
+
+successState: function() {
+    alert("You have succeeded o great hero!");
+    html_start_button.style = show;
 },
