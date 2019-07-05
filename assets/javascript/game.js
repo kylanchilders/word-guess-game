@@ -9,8 +9,8 @@ var hide = "visibility: hidden;";
 var userInput;
 
 // Start game button
-document.getElementById("game_start").onclick = function() {
-    game.setGame();
+document.getElementById("start_button").onclick = function() {
+    game.stageGame();
 }
 
 var game = {
@@ -132,7 +132,7 @@ successState: function() {
 //Running game here
 
 runGame: function() {
-    html_startButton.style = hide;
+    html_start_button.style = hide;
     html_sub_header.style = hide;
     document.onkeyup = function(event) {
         
@@ -140,10 +140,10 @@ runGame: function() {
         game.userInput = event.key.toUpperCase();
         
         // clear any output after player input
-        html_bad_guess_alert.style = hide;
+        html_bad_guess.style = hide;
 
         // calling function to analyze user input
-        game.analyzeEntry(game.answerSpace, game.userInput);
+        game.analyzeGuess(game.answerSpace, game.userInput);
     
         html_right_guesses.textContent = game.arrayToString(game.rightGuesses);
         html_wrong_guesses.textContent =  game.arrayToString(game.wrongGuesses);
